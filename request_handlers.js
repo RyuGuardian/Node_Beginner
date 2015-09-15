@@ -32,6 +32,10 @@ function upload(response, request) {
 
 		/*Possible error on Windows: tried to rename to an 
 			existing file*/
+		if(!fs.existsSync(__dirname + '/tmp')) {
+			fs.mkdir(__dirname + '/tmp');
+		}
+
 		fs.rename(files.upload.path, LOCAL_FILE_PATH, function(error) {
 			if(error) {
 				fs.unlink(LOCAL_FILE_PATH);
